@@ -1,53 +1,36 @@
-var botao = document.getElementById("botao"); 
-botao.addEventListener("click", alertar, false); 
-var nome = document.getElementById("nome");
-var email= document.getElementById("email");
-var saida = document.getElementById("saida"); 
-var telefone = document.getElementById("telefone"); 
-var cep = document.getElementById("cep"); 
-var log = document.getElementById("log"); 
-var numero = document.getElementById("numero"); 
-var comp = document.getElementById("comp"); 
-var bairro = document.getElementById("bairro"); 
-var cidade = document.getElementById("cidade"); 
-var estado =  document.getElementById("estado"); 
 
-
-function alertar(event){
-    alert("Você clicou no botão!" + event); 
-
-
-}
-// function alertar(event){
-//     alert("Você clicou no botão,"+"" +  nome.value)
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Email: " +email.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-var
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
-
-saida.innerText = "Nome: " +nome.value +
-"\n Email:" +email.value; 
+var botao = document.getElementById('botao');
+var saida = document.getElementById('saida-de-dados');
+var nome  = document.getElementById('nome');
+var email  = document.getElementById('email');
+var tel  = document.getElementById('tel');
+var cep = document.getElementById('cep');
+var logr = document.getElementById('logr');
+var num = document.getElementById('num');
+var compl = document.getElementById('compl');
+var bairro = document.getElementById('bairro');
+var cid = document.getElementById('cid');
+var estd = document.getElementById('estd');
+ 
+ 
+botao.addEventListener('click', function(e) {
+   
+ 
+    saida.innerText = `Nome: ${nome.value}  ` + `\nEmail: ${email.value}  ` + `\nTelefone: ${tel.value}  ` + `\nCEP: ${cep.value}  ` + `\nLogradouro: ${logr.value}  ` +
+    `\nNúmero: ${num.value}` + `\nComplemento: ${compl.value}  ` + `\nBairro: ${bairro.value}  ` + `\nCidade: ${cid.value}` +
+    `\nEstado: ${estd.value}`;
+ 
+    const url = `https://viacep.com.br/ws/${cep.value}/json`;
+   
+    fetch(url)
+        .then(resposta => resposta.json())
+        .then(dadosEndereco => {
+            logr.value = dadosEndereco.logradouro;
+            bairro.value = dadosEndereco.bairro;
+            cid.value = dadosEndereco.localidade;
+            estd.value = dadosEndereco.uf;
+            compl.value = dadosEndereco.complemento;
+        });
+       
+ 
+});
