@@ -16,10 +16,18 @@ var estd = document.getElementById('estd');
 botao.addEventListener('click', function(e) {
    
  
-    saida.innerText = `Nome: ${nome.value}  ` + `\nEmail: ${email.value}  ` + `\nTelefone: ${tel.value}  ` + `\nCEP: ${cep.value}  ` + `\nLogradouro: ${logr.value}  ` +
-    `\nNúmero: ${num.value}` + `\nComplemento: ${compl.value}  ` + `\nBairro: ${bairro.value}  ` + `\nCidade: ${cid.value}` +
-    `\nEstado: ${estd.value}`;
- 
+   
+    //validação dos dados 
+
+
+    if(cep.value.length <8){
+        alert('Entre com um cep válido!');
+        return; 
+    }
+
+    //formatar os dados 
+    cep.value = cep.value.replace('-', '');
+    
     const url = `https://viacep.com.br/ws/${cep.value}/json`;
    
     fetch(url)
@@ -30,7 +38,23 @@ botao.addEventListener('click', function(e) {
             cid.value = dadosEndereco.localidade;
             estd.value = dadosEndereco.uf;
             compl.value = dadosEndereco.complemento;
+
+            saidaDeDados(); //chamada da função 
         });
+    
+        function saidaDeDados(){
+            saida.innerText = `Nome: ${nome.value}  ` +
+    `\nEmail: ${email.value}  ` +
+    `\nTelefone: ${tel.value}  ` +
+    `\nCEP: ${cep.value}  ` + 
+    `\nLogradouro: ${logr.value}  ` +
+    `\nNúmero: ${num.value}` + 
+    `\nComplemento: ${compl.value}  ` + 
+    `\nBairro: ${bairro.value}  ` + 
+    `\nCidade: ${cid.value}` +
+    `\nEstado: ${estd.value}`;
+            
+        }
        
  
 });
